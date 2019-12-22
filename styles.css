@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body,
+html {
+  font: bold 30px/1 'Open Sans', sans-serif;
+}
+
+body {
+  color: white;
+  text-align: center;
+  user-select: none;
+  overflow: hidden;
+}
+
+.you-win {
+  align-items: center;
+  background: linear-gradient(#b6480c, #6c0d05);
+  display: flex;
+  font-size: 2rem;
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  top: 100vh;
+  width: 100vw;
+}
+
+footer {
+  background: #146b3a;
+  bottom: 0;
+  padding: 0.25rem;
+  height: 1.5rem;
+  width: 100vw;
+  position: absolute;
+}
+
+footer:before {
+  content: counter(gifts-wrapped) '/' counter(gifts) ' ';
+}
+
+input {
+  counter-increment: gifts;
+  position: absolute;
+	left: -100vw;
+}
+
+input:checked {
+  counter-increment: gifts gifts-wrapped;
+}
+
+label {
+  animation: move 5s infinite linear alternate;
+  display: inline-block;
+  font-size: 1.5rem;
+}
+
+label[for="1"]:before {
+  content: '🧸';
+} 
+
+label[for="2"]:before {
+  content: '🏀';
+}
+
+label[for="3"]:before {
+  content: '🎮';
+}
+
+label[for="4"]:before {
+  content: '🛹';
+}
+
+label[for="5"]:before {
+  content: '🎸';
+}
+
+input:checked + label {
+  animation-play-state: paused;
+  pointer-events: none;
+}
+
+input:checked + label:before {
+  content: '🎁';
+}
+
+label:nth-of-type(even) {
+  animation-direction: alternate-reverse;
+  animation-duration: 3.5;
+  transform: translateY(calc(100vh - 3rem));
+}
+
+label:nth-of-type(n + 3) {
+  animation-delay: 1s;
+}
+
+label:nth-of-type(-n + 3) {
+  animation-duration: 7s;
+}
+
+input:checked
+  ~ input:checked
+  ~ input:checked
+  ~ input:checked
+  ~ input:checked
+  ~ .you-win {
+  top: 0;
+  transition: 200ms;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(calc(30vh)) translateX(50px);
+  }
+  40% {
+    transform: translateY(calc(80vh - 3rem)) translateX(-150px);
+  }
+  60% {
+    transform: translateY(calc(50vh - 3rem)) translateX(-100px);
+  }
+  80% {
+    transform: translateY(calc(85vh - 3rem)) translateX(100px);
+  }
+  100% {
+    transform: translateY(calc(100vh - 3rem));
+  }
+}
